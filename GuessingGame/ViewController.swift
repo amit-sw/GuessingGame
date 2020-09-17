@@ -33,9 +33,7 @@ class ViewController: UIViewController {
 
     @IBAction func submitPressed(_ sender: Any) {
         print("Button pressed with input=",nextGuessText!.text!)
-        /*
-        UIApplication.shared.sendAction(#selector(self.resignFirstResponder), to:nil, from:nil, for:nil)
- */
+        //UIApplication.shared.sendAction(#selector(self.resignFirstResponder), to:nil, from:nil, for:nil)
         // Read and process the input
         let guessed=Int(nextGuessText!.text!)!
         processGuess(guessed)
@@ -45,10 +43,12 @@ class ViewController: UIViewController {
         updateGuessInformation()
         }
     }
+    
     func generateRandomNumber() {
         numberToGuess = Int.random(in: lowRange ... highRange)
         print("Generated random number:",numberToGuess)
     }
+    
     func processGuess(_ guessedNumber: Int) {
         guessesUsed += 1
         print("Just saw new guess:",guessedNumber," vs. numberToGuess=",numberToGuess)
@@ -70,6 +70,7 @@ class ViewController: UIViewController {
         }
         return
     }
+    
     func processMatch() {
         print("MATCHED!!")
         let successMsg=String(format:"You correctly guessed %d in %d tries",numberToGuess,guessesUsed)
@@ -78,10 +79,12 @@ class ViewController: UIViewController {
         guessCountLabel.isHidden=true
         submitButton.setTitle("Well done!!", for: UIControl.State.normal)
     }
+    
     func updateGuessInformation() {
         guessCountLabel.text=String(format:"Tries remaining: %d",totalGuesses-guessesUsed)
         topText.text=String(format:"What is X? \n %d < x < %d",lowRange,highRange)
     }
+    
     func fixupUI() {
         submitButton.backgroundColor = .clear
         submitButton.layer.cornerRadius = 25
