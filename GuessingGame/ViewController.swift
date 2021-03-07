@@ -93,4 +93,9 @@ class ViewController: UIViewController {
         submitButton.backgroundColor = UIColor.blue
         submitButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
 }
