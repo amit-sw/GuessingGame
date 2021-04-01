@@ -55,13 +55,11 @@ class ViewController: UIViewController {
         if(guessedNumber == numberToGuess) {
             processMatch()
         } else {
-            if(guessedNumber<numberToGuess) {
-                // Too low
+            if(guessedNumber<numberToGuess) { // Too low
                 if(guessedNumber>lowRange) {
                     lowRange=guessedNumber
                 }
-            } else {
-                // Too high
+            } else { // Too high
                 if(guessedNumber<highRange) {
                     highRange=guessedNumber
                 }
@@ -82,7 +80,7 @@ class ViewController: UIViewController {
     
     func updateGuessInformation() {
         guessCountLabel.text=String(format:"Tries remaining: %d",totalGuesses-guessesUsed)
-        topText.text=String(format:"What is X? \n %d < x < %d",lowRange,highRange)
+        topText.text=String(format:"What is X? \n \(lowRange) < x < \(highRange)")
     }
     
     func fixupUI() {
