@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         processGuess(guessed)
         nextGuessText!.text=""
         nextGuessText!.placeholder="Next guess"
-        if(guessed != numberToGuess) {
+        if(guessed != numberToGuess && guessesUsed<totalGuesses) {
         updateGuessInformation()
         }
     }
@@ -54,7 +54,11 @@ class ViewController: UIViewController {
         print("Just saw new guess:",guessedNumber," vs. numberToGuess=",numberToGuess)
         if(guessedNumber == numberToGuess) {
             processMatch()
+            return
         } else {
+            if(guessesUsed>=totalGuesses) {
+                processNoMatch()
+            }
             if(guessedNumber<numberToGuess) { // Too low
                 if(guessedNumber>lowRange) {
                     lowRange=guessedNumber
@@ -64,7 +68,7 @@ class ViewController: UIViewController {
                     highRange=guessedNumber
                 }
             }
-            updateGuessInformation()
+            //updateGuessInformation()
         }
         return
     }
@@ -76,6 +80,15 @@ class ViewController: UIViewController {
         nextGuessText.isHidden=true
         guessCountLabel.isHidden=true
         submitButton.setTitle("Well done!!", for: UIControl.State.normal)
+    }
+    
+    func processNoMatch() {
+        print("NOT MATCHED!!")
+        let successMsg=String(format:"Sorry - the number was %d",numberToGuess)
+        topText.text=successMsg
+        nextGuessText.isHidden=true
+        guessCountLabel.isHidden=true
+        submitButton.setTitle("Better luck next time!!", for: UIControl.State.normal)
     }
     
     func updateGuessInformation() {
